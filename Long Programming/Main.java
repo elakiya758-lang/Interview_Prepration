@@ -33,20 +33,20 @@ class Vehicle {
 
 class Slot {
     private int slotId;
-    private Vehicle vehicle;
+    private Vehicle vehicleID;
 
     public Slot(int slotId) {
         this.slotId = slotId;
-        this.vehicle = null;
+        this.vehicleID = null;
     }
 
     public boolean isEmpty() {
-        return vehicle == null;
+        return vehicleID == null;
     }
 
     public boolean park(Vehicle v) {
         if (isEmpty()) {
-            this.vehicle = v;
+            this.vehicleID = v;
             return true;
         }
         return false;
@@ -54,7 +54,7 @@ class Slot {
 
     public boolean remove() {
         if (!isEmpty()) {
-            this.vehicle = null;
+            this.vehicleID = null;
             return true;
         }
         return false;
@@ -64,8 +64,8 @@ class Slot {
         return slotId;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public Vehicle getVehicleID() {
+        return vehicleID;
     }
 
     @Override
@@ -73,7 +73,7 @@ class Slot {
         if (isEmpty()) {
             return "Slot " + slotId + ": Empty";
         } else {
-            return "Slot " + slotId + ": Occupied by " + vehicle;
+            return "Slot " + slotId + ": Occupied by " + vehicleID;
         }
     }
 }
@@ -91,7 +91,7 @@ class ParkingLot {
     
     public boolean isVehicleExists(int vehicleId) {
         for (Slot slot : slots) {
-            if (!slot.isEmpty() && slot.getVehicle().getVehicleId() == vehicleId) {
+            if (!slot.isEmpty() && slot.getVehicleID().getVehicleId() == vehicleId) {
                 return true;
             }
         }
@@ -118,7 +118,7 @@ class ParkingLot {
 
     public boolean removeVehicle(int vehicleId) {
         for (Slot slot : slots) {
-            if (!slot.isEmpty() && slot.getVehicle().getVehicleId() == vehicleId) {
+            if (!slot.isEmpty() && slot.getVehicleID().getVehicleId() == vehicleId) {
                 slot.remove();
                 System.out.println("Vehicle ID " + vehicleId + " removed from Slot " + slot.getSlotId());
                 return true;
@@ -153,7 +153,7 @@ public class Main {
             System.out.print("Enter choice: ");
 
             int choice = sc.nextInt();
-            sc.nextLine(); // clear buffer
+            sc.nextLine(); 
 
             switch (choice) {
                 case 1:
