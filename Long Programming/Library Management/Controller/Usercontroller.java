@@ -1,36 +1,38 @@
 package t.com.libary.Controller;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import t.com.libary.BookService.Userservice;
+
 import t.com.libary.Entity.User;
+import org.springframework.web.bind.annotation.*;
+import t.com.libary.BookService.UserService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class Usercontroller {
+public class UserController {
 
-    @Autowired
-    private Userservice userService;
+    private final UserService service;
 
-    @GetMapping("/login")
-    public List<User> getallusers() {
-        return userService.getallusers();
+    public UserController(UserService service) {
+        this.service = service;
     }
 
-    @PostMapping("/adduser")
-    public User createuser(@RequestBody User u) {
-        u.setUserid(0);
-        return userService.saveuser(u);
+    @GetMapping("/api")
+    public List<User> getUsers() {
+        return service.getAllUsers();
+    }
+
+    @PostMapping("/postuser")
+    public User addUser(@RequestBody User u) {
+        return service.addUser(u);
     }
 
     @PutMapping("/{id}")
-    public User updateuser(@PathVariable("id") int userid, @RequestBody User u) {
-        return userService.updateuser(userid, u);
+    public User updateUser(@PathVariable int id, @RequestBody User u) {
+        return service.updateUser(id, u);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteuser(@PathVariable("id") int userid) {
-        return userService.deleteuser(userid);
+    public String deleteUser(@PathVariable int id) {
+        return service.deleteUser(id);
     }
 }

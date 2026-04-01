@@ -4,21 +4,24 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Entity
 @Getter
 @Setter
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int bookid;
-    @Column(name="Booktitle")
-    private String Booktitle;
-    @Column(name="Author")
-    private String Author;
-    @Column(name="Publiser")
-    private String Publiser;
+    private Integer bookId;
+
+    @Column(name = "bookName")
+    private String bookName;
+
+    @Column(name = "author")
+    private String author;
+
+    @Column(name = "publisher")
+    private String publisher;
     @ManyToOne
-    @JoinColumn(name="userid",nullable = false)
-    private User userid;
+    @JoinColumn(name = "userid")
+    private User user;
 }

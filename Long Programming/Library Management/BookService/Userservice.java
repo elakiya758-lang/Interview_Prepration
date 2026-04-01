@@ -1,7 +1,7 @@
+
 package t.com.libary.BookService;
 
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import t.com.libary.BookRepository.UserRepository;
 import t.com.libary.Entity.User;
@@ -9,36 +9,33 @@ import t.com.libary.Entity.User;
 import java.util.List;
 
 @Service
-public class Userservice {
+public class UserService {
 
-    @Autowired
-    private UserRepository userRepo;
+    private final UserRepository repo;
 
-
-    public List<User> getallusers() {
-        return userRepo.findAll();
+    public UserService(UserRepository repo) {
+        this.repo = repo;
     }
 
-
-    public User saveuser(User user) {
-        return userRepo.save(user);
+    public List<User> getAllUsers() {
+        return repo.findAll();
     }
 
-
-    public User updateuser(int userid, User user) {
-        User existing = userRepo.findById(userid)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        existing.setUsername(user.getUsername());
-
-        return userRepo.save(existing);
+    public User addUser(User u) {
+        return repo.save(u);
     }
 
+    public User updateUser(int id, User u) {
+        User exists = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-    public String deleteuser(int userid) {
-        if (!userRepo.existsById(userid)) {
-            throw new EntityNotFoundException("User not found");
-        }
-        userRepo.deleteById(userid);
-        return "User deleted successfully";
+        exists.setUsername(u.getUsername());
+
+        return repo.save(exists);
+    }
+
+    public String deleteUser(int id) {
+        repo.deleteById(id);
+        return "User deleted";
     }
 }
