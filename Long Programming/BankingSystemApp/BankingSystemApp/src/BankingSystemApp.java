@@ -33,7 +33,7 @@ class Account {
         this.aadharNo = aadharNo;
 
 
-        if (accountType.equalsIgnoreCase("SAVINGS")) {
+        if (accountType.equalsIgnoreCase("Saving")) {
             this.minBalance = 1000;
         }
         else {
@@ -41,7 +41,7 @@ class Account {
         }
     }
     public String toString(){
-        return "Account Id: " + this.accountId + ", Account Type: " + this.accountType + "Balance" + this.balance;
+        return "Account Id: " + this.accountId + ", Account Type: " + this.accountType + ", Balance" + this.balance;
     }
 }
 
@@ -70,7 +70,7 @@ public class BankingSystemApp {
             return;
         }
         accountRegistry.put(accountId, new Account(accountId,holderName,accountType,aadharNo,bankName,Branch,IFSC));
-        System.out.println("√ Account created for " +holderName);
+        System.out.println("Account created for " +holderName);
     }
 
     public void deposit(String accId, double amount) {
@@ -84,7 +84,7 @@ public class BankingSystemApp {
         acc.balance += amount;
         acc.transactions.add(new Transaction("DEPOSIT", amount, accId, accId));
 
-        System.out.println("√ Deposited $" + amount);
+        System.out.println("Deposited $" + amount);
     }
 
     public void withdraw(String accId, double amount) {
@@ -108,7 +108,7 @@ public class BankingSystemApp {
         acc.balance -= amount;
         acc.transactions.add(new Transaction("WITHDRAW", amount, accId, accId));
 
-        System.out.println("√ Withdrawn $" + amount);
+        System.out.println("Withdrawn $" + amount);
     }
     public void balance(String accountId) {
     Account acc = accountRegistry.get(accountId);
@@ -163,9 +163,9 @@ public static void main(String[] args)
             System.out.println("1. Create Account");
             System.out.println("2. Deposit Account");
             System.out.println("3. Withdraw Account");
-            System.out.println("4.balance");
+            System.out.println("4. Balance");
             System.out.println("5. Transfer Account");
-            System.out.println("6.Print Account");
+            System.out.println("6. Print Account");
             System.out.println("7. Exit");
             try
             {

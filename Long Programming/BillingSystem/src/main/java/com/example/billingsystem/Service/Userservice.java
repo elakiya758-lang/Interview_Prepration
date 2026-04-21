@@ -16,17 +16,17 @@ public class Userservice {
         this.repo = repo;
     }
 
-    // GET ALL
+
     public List<User> getAllUsers() {
         return repo.findAll();
     }
 
-    // CREATE
+
     public User saved(User u) {
         return repo.save(u);
     }
 
-    // UPDATE
+
     public User updateUser(int userid, User u) {
         User existing = repo.findById(userid)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
@@ -36,7 +36,7 @@ public class Userservice {
         return repo.save(existing);
     }
 
-    // DELETE
+
     public String deleteUser(int id) {
         if (!repo.existsById(id)) {
             throw new EntityNotFoundException("User not found");
