@@ -1,7 +1,7 @@
 import pandas as pd
 
 def preprocess():
-    df = pd.read_csv("data/data.csv")
+    df = pd.read_csv("data.csv")
 
     df.fillna(0, inplace=True)
 
